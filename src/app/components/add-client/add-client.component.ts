@@ -12,7 +12,7 @@ import { ClientService } from '../../services/client.service';
 })
 export class AddClientComponent implements OnInit {
  client:Client ={
-   id: '33',
+   $key : '',
   firstName:'', 
   lastName: '',
   email: '',
@@ -33,7 +33,7 @@ disableBalanceOnAdd :boolean =false;
     if(this.disableBalanceOnAdd){
       value.balance = 0;
     }
-   
+  
     if(!valid){
       this.flashMessagesService.show("Please fill all fields",
       {cssClass:'alert-danger',timeout:4000});
