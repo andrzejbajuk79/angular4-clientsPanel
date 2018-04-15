@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import 'rxjs/add/operator/map';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ loggedInUser:string;
 showRegister:boolean;
 
   constructor(
+    private  settingService: SettingService,
     private flashMessagesService : FlashMessagesService,
     private router: Router,
     private authService: AuthService  
@@ -28,6 +30,7 @@ showRegister:boolean;
       }else{
         this.isLoggedIn =  false;
       }
+      this.showRegister = this.settingService.getSettings().allowRegistration;
     })
   }
   onLogoutClick(){
