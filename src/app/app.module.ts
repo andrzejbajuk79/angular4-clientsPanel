@@ -28,16 +28,17 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 //Sevice Imports
 import { ClientService } from './services/client.service';
 import { AuthService  } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const appRoutes : Routes = [
   // {path:'',component:DashboardComponent},
   {path:'register',component:RegisterComponent},
   {path: 'login', component:LoginComponent},
-  {path:'add-client',component:AddClientComponent},
-  {path:'client/:id',component: ClientsDetailsComponent},
-  {path:'edit-client/:id',component: EditClientComponent},
-  {path: 'welcome', component : DashboardComponent},
+  {path:'add-client',component:AddClientComponent, canActivate:[AuthGuard]},
+  {path:'client/:id',component: ClientsDetailsComponent, canActivate:[AuthGuard]},
+  {path:'edit-client/:id',component: EditClientComponent, canActivate:[AuthGuard]},
+  {path: 'welcome', component : DashboardComponent, canActivate:[AuthGuard]},
   {path: '', redirectTo: 'welcome',pathMatch: 'full'},
   {path: '**',  redirectTo: 'welcome',pathMatch: 'full'}
 
@@ -71,13 +72,15 @@ export const firebaseConfig =  {
     AngularFireModule.initializeApp(firebaseConfig),
     FormsModule,
     FlashMessagesModule
+    
   ],
   providers: [
     AngularFireAuth,
     ClientService,
     AuthService ,
     AngularFireDatabase,
-    FlashMessagesService 
+    FlashMessagesService ,
+    AuthGuard 
   ],
   bootstrap: [AppComponent]
 })
