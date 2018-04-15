@@ -25,7 +25,7 @@ showBalanceUpdateInput:boolean=false;
   ngOnInit() {
     //Get ID 
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
+    // console.log(this.id);
     //Get Client
     this.clientService.getClient(this.id).valueChanges().subscribe(client =>{
       if(client.balance > 0){
@@ -44,6 +44,14 @@ showBalanceUpdateInput:boolean=false;
     {cssClass: 'alert-success',timeout: 4000})
     this.router.navigate(['/client/'+this.id]);
 
+  }
+  onDeleteClick(id:string){
+    if(confirm("Are you sure you want to delete this client???")){
+      this.clientService.deleteClient(this.id);
+      this.flashMessegesService.show('Client Deleted ',
+    {cssClass: 'alert-success',timeout: 4000})
+      this.router.navigate(['/']);
+    }
   }
 
 }

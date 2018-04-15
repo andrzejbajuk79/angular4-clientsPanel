@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ClientService {
-//  clients : any[];
+  // clients : any[];
   //  clients: AngularFireList<any[]>
   clients: FirebaseListObservable<any[]>;
   client : FirebaseObjectObservable<Client>;
@@ -48,9 +48,11 @@ export class ClientService {
     this.client = this.af.object('/clients/'+id) as FirebaseObjectObservable<Client>;
     return this.client;
    }
-   updateClient(id:string,client:Client){
-     
+   updateClient(id:string,client:Client){  
     return this.clients.update(id,client);
+   }
+   deleteClient(id:string){
+     return this.clients.remove(id);
    }
  
 }
