@@ -27,6 +27,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 //Sevice Imports
 import { ClientService } from './services/client.service';
+import { AuthService  } from './services/auth.service';
 
 
 const appRoutes : Routes = [
@@ -74,6 +75,7 @@ export const firebaseConfig =  {
   providers: [
     AngularFireAuth,
     ClientService,
+    AuthService ,
     AngularFireDatabase,
     FlashMessagesService 
   ],
